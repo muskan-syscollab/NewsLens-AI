@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add News | NewsLens AI</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:#f4f4f4;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+        }
+
+        .container{
+            width:600px;
+            background:#fff;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 5px 20px rgba(0,0,0,.15);
+        }
+
+        h2{
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+        input,
+        textarea{
+            width:100%;
+            padding:12px;
+            margin:10px 0 20px;
+            border:1px solid #ccc;
+            border-radius:5px;
+            font-size:16px;
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        button{
+            width:100%;
+            padding:14px;
+            background:#007bff;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#0056b3;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h2>Add News</h2>
+
+    <input
+        type="text"
+        id="title"
+        placeholder="Enter News Title">
+
+    <textarea
+        id="content"
+        rows="8"
+        placeholder="Enter News Content"></textarea>
+
+    <button onclick="addNews()">
+        Submit News
+    </button>
+
+</div>
+
+<script>
+
+async function addNews(){
+
+    const title = document.getElementById("title").value.trim();
+    const content = document.getElementById("content").value.trim();
+
+    if(title === "" || content === ""){
+        alert("Please fill all fields.");
+        return;
+    }
+
+    try{
+
+        const response = await fetch(
+            "http://127.0.0.1:8000/add-news",
+            {
+                method: "POST",
+                headers:{
+                    "Content-Type":"application/json"
+                },
+                body: JSON.stringify({
+                    title: title,
+                    content: content
+                })
+            }
+        );
+
+        if(!response.ok){
+            throw new Error("Server Error");
+        }
+
+        const data = await response.json();
+
+       alert(
+    "News Added!\n\n" +
+    "Category: " + data.category +
+    "\n\nAI Summary:\n" +
+    data.summary
+);
+
+        console.log("Redirecting...");
+
+      setTimeout(() => {
+    window.location.href = "http://127.0.0.1:5500/backend/dashboard.html";
+}, 500);
+
+return;
+    } catch(error){
+
+        console.error(error);
+
+        alert("Something went wrong.");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>

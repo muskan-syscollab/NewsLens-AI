@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Dashboard</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background:#f4f4f4;
+            padding:20px;
+        }
+
+        h1{
+            text-align:center;
+        }
+
+        .news-container{
+            max-width:900px;
+            margin:auto;
+        }
+
+        .card{
+            background:white;
+            padding:20px;
+            margin:15px 0;
+            border-radius:10px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .category{
+            display:inline-block;
+            padding:5px 10px;
+            background:#007bff;
+            color:white;
+            border-radius:20px;
+            font-size:12px;
+        }
+        #addNewsBtn{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    width:65px;
+    height:65px;
+    border:none;
+    border-radius:50%;
+    background:#007bff;
+    color:white;
+    font-size:38px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+    transition:.3s;
+}
+
+#addNewsBtn:hover{
+    transform:scale(1.1);
+    background:#0056b3;
+}
+    </style>
+</head>
+
+<body>
+
+    <h1>NewsLens AI Dashboard</h1>
+
+    <div id="newsContainer" class="news-container">
+
+    </div>
+
+    <script>
+
+        async function loadNews() {
+
+            const response = await fetch(
+                "http://127.0.0.1:8000/news"
+            );
+
+            const news = await response.json();
+
+            const container =
+                document.getElementById("newsContainer");
+
+            container.innerHTML = "";
+
+            news.forEach(item => {
+
+    container.innerHTML += `
+        <div class="card">
+
+            <h2>📰 ${item.title}</h2>
+
+            <h4>📄 Original News</h4>
+            <p>${item.content}</p>
+
+            <hr>
+
+            <h4>🤖 AI Summary</h4>
+            <p>${item.summary}</p>
+
+            <br>
+
+            <span class="category">
+    ${item.category}
+</span>
+
+<br><br>
+
+<button onclick="deleteNews(${item.id})" class="delete-btn">
+    🗑 Delete
+</button>
+        </div>
+    `;
+});
+        }
+
+        loadNews();
+        async function deleteNews(id){
+
+    const confirmDelete = confirm("Delete this news?");
+
+    if(!confirmDelete) return;
+
+    const response = await fetch(
+        `http://127.0.0.1:8000/delete-news/${id}`,
+        {
+            method:"DELETE"
+        }
+    );
+
+    const data = await response.json();
+
+    alert(data.message);
+
+    loadNews();   // Reload the dashboard after deleting
+}
+
+    </script>
+
+<button id="addNewsBtn" onclick="window.location.href='add_news.html'">
+    +
+</button>
+</body>
+</html>

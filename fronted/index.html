@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsLens AI Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<!-- =========================
+        TOP NAVBAR
+========================== -->
+
+<nav class="navbar">
+
+    <!-- Logo -->
+
+    <div class="logo">
+        <div class="logo-icon">📰</div>
+
+        <div class="logo-text">
+            NewsLens <span>AI</span>
+        </div>
+    </div>
+
+
+    <!-- Search -->
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search latest news..."
+        >
+
+        <button id="searchBtn">
+            Search
+        </button>
+
+    </div>
+
+
+    <!-- Right Side -->
+
+    <div class="nav-right">
+
+        <button id="darkModeBtn">
+            🌙
+        </button>
+
+        <div class="profile">
+
+            <div class="avatar">
+                👤
+            </div>
+
+            <span id="username">
+                User
+            </span>
+
+        </div>
+
+        <a href="#" class="logout-btn" onclick="logout()">
+            🚪 Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================
+      FEATURE BAR
+========================== -->
+
+<div class="feature-bar">
+
+    <a href="dashboard.html" class="feature active">
+        🏠 Dashboard
+    </a>
+
+    <a href="add_news.html" class="feature">
+        ➕ Add News
+    </a>
+
+    <a href="bookmarks.html" class="feature">
+        ⭐ Bookmarks
+    </a>
+
+</div>
+    <!-- Categories -->
+
+    <section class="categories">
+
+    <button onclick="fetchNews('technology')">
+        Technology
+    </button>
+
+    <button onclick="fetchNews('business')">
+        Business
+    </button>
+
+    <button onclick="fetchNews('sports')">
+        Sports
+    </button>
+
+    <button onclick="fetchNews('health')">
+        Health
+    </button>
+
+    <button onclick="fetchNews('science')">
+        Science
+    </button>
+
+    <button onclick="fetchNews('entertainment')">
+        Entertainment
+    </button>
+
+</section>
+
+<section class="trending-topics">
+
+    <h3> Trending Topics </h3>
+
+    <div class="topics">
+    <button class="topic-btn">#AI</button>
+    <button class="topic-btn">#Python</button>
+    <button class="topic-btn">#OpenAI</button>
+    <button class="topic-btn">#Technology</button>
+    <button class="topic-btn">#Startups</button>
+</div>
+
+</section>
+
+    <!-- Heading -->
+
+    <section class="heading">
+
+        <h2>Trending News</h2>
+
+    </section>
+
+    <!-- News Cards -->
+
+    <section class="news-container" id="newsContainer">
+
+</section>
+
+   <script src="js/app.js"></script>
+
+<script>
+function logout() {
+
+    const confirmLogout = confirm("Are you sure you want to logout?");
+
+    if (!confirmLogout) return;
+
+    localStorage.removeItem("user");
+
+    window.location.href = "login.html";
+}
+</script>
+<footer class="footer">
+
+    <div class="footer-content">
+
+        <h2>📰 NewsLens AI</h2>
+
+        <p>
+            AI-powered news discovery, intelligent summarization,
+            and smart bookmarking platform.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="dashboard.html">Dashboard</a>
+
+            <a href="add_news.html">Add News</a>
+
+            <a href="bookmarks.html">Bookmarks</a>
+
+        </div>
+
+        <div class="footer-tech">
+
+            Built with ❤️ using
+            HTML • CSS • JavaScript • FastAPI • SQLite • Groq AI
+        </div>
+
+        <div class="copyright">
+
+            © 2026 NewsLens AI. All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+</body>
+</html>
