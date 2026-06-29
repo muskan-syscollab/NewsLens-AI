@@ -7,7 +7,7 @@ if (loginForm) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("http://127.0.0.1:8000/login", {
+    const response = await fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +31,7 @@ if (loginForm) {
         }),
       );
 
-      window.location.href = "index.html";
+      window.location.href = "/";
     }
   });
 }
@@ -54,7 +54,7 @@ if (registerForm) {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/register", {
+      const response = awaitfetch("/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ if (registerForm) {
       if (data.message === "User Registered Successfully") {
         alert("Registration Successful 🎉");
 
-        window.location.href = "login.html";
+        window.location.href = "/login-page";
       } else {
         alert(data.message);
       }
@@ -90,7 +90,7 @@ if (forgotForm) {
     const email = document.getElementById("email").value;
     const newPassword = document.getElementById("newPassword").value;
 
-    const response = await fetch("http://127.0.0.1:8000/reset-password", {
+    const response = await fetch("/reset-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
