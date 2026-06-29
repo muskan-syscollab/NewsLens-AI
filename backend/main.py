@@ -26,12 +26,10 @@ app.add_middleware(
 app.include_router(router)
 
 # Static folders
-app.mount("/css", StaticFiles(directory="../css"), name="css")
-app.mount("/js", StaticFiles(directory="../js"), name="js")
+app.mount("/css", StaticFiles(directory="../fronted/css"), name="css")
+app.mount("/js", StaticFiles(directory="../fronted/js"), name="js")
 
-# HTML templates
-templates = Jinja2Templates(directory="templates")
-
+templates = Jinja2Templates(directory="../fronted")
 
 # Home Page
 @app.get("/", response_class=HTMLResponse)
