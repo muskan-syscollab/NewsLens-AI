@@ -102,7 +102,7 @@ async function addNews(){
     try{
 
         const response = await fetch(
-            "http://127.0.0.1:8000/add-news",
+            "https://newslens-ais.onrender.com",
             {
                 method: "POST",
                 headers:{
@@ -131,7 +131,7 @@ async function addNews(){
         console.log("Redirecting...");
 
       setTimeout(() => {
-    window.location.href = "http://127.0.0.1:5500/backend/dashboard.html";
+    window.location.href = "/dashboard-page";
 }, 500);
 
 return;
