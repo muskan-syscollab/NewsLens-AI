@@ -71,7 +71,7 @@
         async function loadNews() {
 
             const response = await fetch(
-                "https://newslens-ais.onrender.com"
+                
             );
 
             const news = await response.json();
@@ -83,7 +83,7 @@
 
             news.forEach(item => {
 
-    container.innerHTML += `
+    container.innerHTML += `"https://newslens-backend-rk90.onrender.com/news"
         <div class="card">
 
             <h2>📰 ${item.title}</h2>
@@ -120,11 +120,11 @@
     if(!confirmDelete) return;
 
     const response = await fetch(
-        `http://127.0.0.1:8000/delete-news/${id}`,
-        {
-            method:"DELETE"
-        }
-    );
+    `https://newslens-backend-rk90.onrender.com/delete-news/${id}`,
+    {
+        method:"DELETE"
+    }
+);
 
     const data = await response.json();
 
