@@ -39,38 +39,43 @@ async function fetchNews(topic) {
 function displayNews(articles, topic) {
   newsContainer.innerHTML = "";
 
+  if (!articles || articles.length === 0) {
+    newsContainer.innerHTML = "<h2>No News Found</h2>";
+    return;
+  }
+
   articles.forEach((article) => {
-    if (!article.urlToImage) return;
+    if (!article.image) return;
 
     const card = document.createElement("div");
 
     card.className = "news-card";
 
     card.innerHTML = `
-            <img src="${article.urlToImage}" alt="news">
+            <img src="${article.image}" alt="news">
 
             <div class="news-content">
 
                 <h3>${article.title}</h3>
 
-                <p>
-                    ${article.description || "No description available"}
-                </p>
+                <p>${article.description || ""}</p>
 
-               <div class="card-buttons">
-    <button onclick="window.open('${article.url}')">
-        Read More
-    </button>
+                <div class="card-buttons">
 
-    <button onclick='saveBookmark(
-        ${JSON.stringify(article.title)},
-        ${JSON.stringify(article.url)},
-        ${JSON.stringify(article.urlToImage)},
-        ${JSON.stringify(topic)}
-    )'>
-        ⭐ Save
-    </button>
-</div>
+                    <button onclick="window.open('${article.url}')">
+                        Read More
+                    </button>
+
+                    <button onclick='saveBookmark(
+                        ${JSON.stringify(article.title)},
+                        ${JSON.stringify(article.url)},
+                        ${JSON.stringify(article.image)},
+                        ${JSON.stringify(topic)}
+                    )'>
+                        ⭐ Save
+                    </button>
+
+                </div>
 
             </div>
         `;
