@@ -102,19 +102,18 @@ async function addNews(){
     try{
 
         const response = await fetch(
-            "https://newslens-ais.onrender.com",
-            {
-                method: "POST",
-                headers:{
-                    "Content-Type":"application/json"
-                },
-                body: JSON.stringify({
-                    title: title,
-                    content: content
-                })
-            }
-        );
-
+    "https://newslens-backend-rk90.onrender.com/add-news",
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title,
+            content
+        })
+    }
+);
         if(!response.ok){
             throw new Error("Server Error");
         }
