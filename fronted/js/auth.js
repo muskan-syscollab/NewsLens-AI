@@ -7,16 +7,19 @@ if (loginForm) {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    const response = await fetch("/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "https://newslens-backend-rk90.onrender.com/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
       },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    );
 
     const data = await response.json();
 
@@ -31,7 +34,7 @@ if (loginForm) {
         }),
       );
 
-      window.location.href = "/";
+      window.location.href = "index.html";
     }
   });
 }
@@ -54,24 +57,27 @@ if (registerForm) {
     }
 
     try {
-      const response = await fetch("/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://newslens-backend-rk90.onrender.com/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: fullname,
+            email: email,
+            password: password,
+          }),
         },
-        body: JSON.stringify({
-          name: fullname,
-          email: email,
-          password: password,
-        }),
-      });
+      );
 
       const data = await response.json();
 
       if (data.message === "User Registered Successfully") {
         alert("Registration Successful 🎉");
 
-        window.location.href = "/login-page";
+        window.location.href = "login.html";
       } else {
         alert(data.message);
       }
@@ -90,16 +96,19 @@ if (forgotForm) {
     const email = document.getElementById("email").value;
     const newPassword = document.getElementById("newPassword").value;
 
-    const response = await fetch("/reset-password", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await fetch(
+      "https://newslens-backend-rk90.onrender.com/reset-password",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          new_password: newPassword,
+        }),
       },
-      body: JSON.stringify({
-        email: email,
-        new_password: newPassword,
-      }),
-    });
+    );
 
     const data = await response.json();
 
