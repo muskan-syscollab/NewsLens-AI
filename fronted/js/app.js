@@ -12,7 +12,6 @@ topicButtons.forEach((button) => {
     fetchNews(topic);
   });
 });
-const API_KEY = "dfa3c47991a74e6ca839343573a413c8";
 
 const newsContainer = document.getElementById("newsContainer");
 
@@ -23,10 +22,11 @@ window.addEventListener("load", () => {
 
 // Fetch news
 async function fetchNews(topic) {
-  const url = `https://newsapi.org/v2/everything?q=${topic}&pageSize=9&sortBy=publishedAt&apiKey=${API_KEY}`;
-
   try {
-    const response = await fetch(url);
+    const response = await fetch(
+      `https://newslens-backend-rk90.onrender.com/latest-news?topic=${topic}`,
+    );
+
     const data = await response.json();
 
     displayNews(data.articles, topic);
