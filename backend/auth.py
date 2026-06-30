@@ -2,6 +2,8 @@ from fastapi import APIRouter, Depends
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
+import os
+import requests
 from database import SessionLocal
 from models import User, News
 from ai import classify_news
@@ -226,3 +228,13 @@ def delete_news(news_id: int, db: Session = Depends(get_db)):
     db.commit()
 
     return {"message": "News deleted successfully"}
+@router.get("/latest-news")
+def latest_news(topic: str = "technology"):
+
+    api_key = os.getenv("GNEWS_API_KEY")
+
+    url = f"https://gnews.io/api/v4/search?q={topic}&lang=en&max=9&apikey={api_key}"
+
+    response = requests.get(url)
+
+    return response.json()
