@@ -193,14 +193,17 @@ def add_news(
     )
 
     db.add(new_news)
-    db.commit()
-    db.refresh(new_news)
+db.commit()
+db.refresh(new_news)
 
-    return {
-        "message": "News Added Successfully",
-        "category": category,
-        "summary": summary
-    }
+print("Saved news ID:", new_news.id)
+
+return {
+    "message": "News Added Successfully",
+    "id": new_news.id,
+    "category": category,
+    "summary": summary
+}
 @router.get("/news")
 def get_news(db: Session = Depends(get_db)):
 
