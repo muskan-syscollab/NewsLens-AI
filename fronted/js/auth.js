@@ -40,15 +40,9 @@ if (loginForm) {
 }
 // REGISTER
 
-// REGISTER
-
 const registerForm = document.getElementById("registerForm");
 
 if (registerForm) {
-  const registerBtn = document.getElementById("registerBtn");
-  const registerText = document.getElementById("registerText");
-  const registerSpinner = document.getElementById("registerSpinner");
-
   registerForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -61,11 +55,6 @@ if (registerForm) {
       alert("Passwords do not match!");
       return;
     }
-
-    // Show Spinner
-    registerBtn.disabled = true;
-    registerText.style.display = "none";
-    registerSpinner.style.display = "inline-block";
 
     try {
       const response = await fetch(
@@ -91,20 +80,10 @@ if (registerForm) {
         window.location.href = "/index.html";
       } else {
         alert(data.message);
-
-        // Restore button
-        registerBtn.disabled = false;
-        registerText.style.display = "inline";
-        registerSpinner.style.display = "none";
       }
     } catch (error) {
       console.log(error);
       alert("Server Error");
-
-      // Restore button
-      registerBtn.disabled = false;
-      registerText.style.display = "inline";
-      registerSpinner.style.display = "none";
     }
   });
 }
