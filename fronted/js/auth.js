@@ -77,7 +77,7 @@ if (registerForm) {
       if (data.message === "User Registered Successfully") {
         alert("Registration Successful 🎉");
 
-        window.location.href = "/login.html";
+        window.location.href = "/index.html";
       } else {
         alert(data.message);
       }

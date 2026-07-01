@@ -45,7 +45,7 @@ def index(request: Request):
 def login_page(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="login.html",
+        name="index.html",
         context={}
     )
 
