@@ -36,7 +36,7 @@ templates = Jinja2Templates(directory="../fronted")
 def index(request: Request):
     return templates.TemplateResponse(
         request=request,
-        name="index.html",
+        name="home.html",
         context={}
     )
 
@@ -71,7 +71,7 @@ def forgot_page(request: Request):
 
 
 # Dashboard Page
-@app.get("/dashboard-page", response_class=HTMLResponse)
+@app.get("/dashboard.html", response_class=HTMLResponse)
 def dashboard_page(request: Request):
     return templates.TemplateResponse(
         request=request,
@@ -81,7 +81,7 @@ def dashboard_page(request: Request):
 
 
 # Add News Page
-@app.get("/add-news-page", response_class=HTMLResponse)
+@app.get("/add_news.html", response_class=HTMLResponse)
 def add_news_page(request: Request):
     return templates.TemplateResponse(
         request=request,

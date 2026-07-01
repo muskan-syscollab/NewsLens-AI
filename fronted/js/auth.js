@@ -34,7 +34,7 @@ if (loginForm) {
         }),
       );
 
-      window.location.href = "/index.html";
+      window.location.href = "/home.html";
     }
   });
 }
