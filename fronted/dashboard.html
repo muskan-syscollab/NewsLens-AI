@@ -70,20 +70,21 @@
 
         async function loadNews() {
 
-            const response = await fetch(
-                
-            );
+    const response = await fetch(
+        "https://newslens-backend-rk90.onrender.com/news"
+    );
 
-            const news = await response.json();
+    const news = await response.json();
 
-            const container =
-                document.getElementById("newsContainer");
+    console.log(news);
 
-            container.innerHTML = "";
+    const container = document.getElementById("newsContainer");
 
-            news.forEach(item => {
+    container.innerHTML = "";
 
-    container.innerHTML += `"https://newslens-backend-rk90.onrender.com/news"
+    news.forEach(item => {
+
+        container.innerHTML += `
         <div class="card">
 
             <h2>📰 ${item.title}</h2>
@@ -99,18 +100,21 @@
             <br>
 
             <span class="category">
-    ${item.category}
-</span>
+                ${item.category}
+            </span>
 
-<br><br>
+            <br><br>
 
-<button onclick="deleteNews(${item.id})" class="delete-btn">
-    🗑 Delete
-</button>
+            <button onclick="deleteNews(${item.id})">
+                🗑 Delete
+            </button>
+
         </div>
-    `;
-});
-        }
+        `;
+
+    });
+
+}
 
         loadNews();
         async function deleteNews(id){
